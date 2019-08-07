@@ -1,0 +1,57 @@
+{
+  "name": "@ebottacin/ngx-translate-extract-kml",
+  "version": "1.0.0",
+  "description": "extract ngx-translate strings from angular app and writes as kml files",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "bin/",
+    "dist/"
+  ],
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "watch": "npm run clean && tsc --watch",
+    "clean": "rm -rf ./dist",
+    "lint": "tslint --force './src/**/*.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ebottacin/ngx-translate-extract-kml.git"
+  },
+  "keywords": [
+    "angular",
+    "ionic",
+    "ngx-translate",
+    "extract",
+    "extractor",
+    "translate",
+    "translation",
+    "i18n",
+    "gettext",
+    "ngx-translate-extract",
+    "angular",
+    "ngx-translate"
+  ],
+  "author": "enrico bottacin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ebottacin/ngx-translate-extract-kml/issues"
+  },
+  "homepage": "https://github.com/ebottacin/ngx-translate-extract-kml#readme",
+  "engines": {
+    "node": ">=4.3.2"
+  },
+  "devDependencies": {
+    "@types/inversify": "^2.0.33",
+    "@types/node": "^12.7.0",
+    "tslint": "^5.18.0",
+    "tslint-eslint-rules": "^5.4.0"
+  },
+  "dependencies": {
+    "@biesbjerg/ngx-translate-extract": "^3.0.2",
+    "inversify": "^5.0.1",
+    "path": "^0.12.7",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^3.5.3"
+  }
+}
