@@ -1,4 +1,3 @@
-
 import { TranslationCollection, CompilerInterface, AbstractCompiler } from '@biesbjerg/ngx-translate-extract';
 import { injectable } from 'inversify';
 
@@ -12,6 +11,7 @@ export class KmlCustomCompiler extends AbstractCompiler implements CompilerInter
 	}
 
 	public compile(collection: TranslationCollection): string {
+		// key are mapped PROJECT.PAGE.ID---<free text>
 		throw new Error('not implemented');
 	}
 

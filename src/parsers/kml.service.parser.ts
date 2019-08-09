@@ -1,5 +1,5 @@
 import { ServiceParser, KeysPreprocessContextInterface } from '@biesbjerg/ngx-translate-extract';
-import { getCompleteKey, findKMLName, getPrjName }  from './kml-utils';
+import { getCompleteKey, findKMLName, getPrjName }  from '../utils/utils';
 
 
 export class KmlServiceParser extends ServiceParser {

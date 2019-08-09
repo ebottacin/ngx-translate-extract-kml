@@ -1,13 +1,14 @@
 import { TYPES } from '@biesbjerg/ngx-translate-extract';
 
-import { KmlServiceParser } from '../custom-parsers/kml.service.parser';
-import { KmlDirectiveParser } from '../custom-parsers/kml.directive.parser';
-import { KmlPipeParser } from '../custom-parsers/kml.pipe.parser';
-import { KmlFunctionParser } from '../custom-parsers/kml.function.parser';
+import { KmlServiceParser } from '../parsers/kml.service.parser';
+import { KmlDirectiveParser } from '../parsers/kml.directive.parser';
+import { KmlPipeParser } from '../parsers/kml.pipe.parser';
+import { KmlFunctionParser } from '../parsers/kml.function.parser';
+import { MultipleFileExtractTask } from '../tasks/MultipleFileExtractTask';
 
 
-import { setupParsers, IoCParserConfig, IoCCompilerConfig, setupCompilers, container } from '@biesbjerg/ngx-translate-extract';
-import { KmlCustomCompiler } from '../custom-compilers/kml-custom.compiler';
+import { setupParsers, IoCParserConfig, IoCCompilerConfig, setupCompilers, setupTask, container } from '@biesbjerg/ngx-translate-extract';
+import { KmlCustomCompiler } from '../compilers/kml-custom.compiler';
 
 const parsersConfig: IoCParserConfig = {
 	parsers: [{type: TYPES.SERVICE_PARSER, obj: KmlServiceParser},
@@ -24,5 +25,6 @@ const compilersConfig: IoCCompilerConfig = {
 export const updateContainer = () => {
 	setupCompilers(container, compilersConfig);
 	setupParsers(container, parsersConfig);
+	setupTask( container, MultipleFileExtractTask);
 };
 

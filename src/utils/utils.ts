@@ -6,6 +6,13 @@ export interface KmlConfigObj {
 	name?: string
 }
 
+export interface KmlCompleteKey {
+	prjName: string;
+	kmlName: string;
+	key: string,
+	completeKey: string;
+}
+
 export function findKMLName(sourceFile: SourceFile, nodes?: ClassDeclaration[]|ClassDeclaration): string {
 	if (nodes === undefined) {
 		nodes = findClassNodes(sourceFile);
@@ -25,10 +32,36 @@ export function findKMLName(sourceFile: SourceFile, nodes?: ClassDeclaration[]|C
 
 export function getCompleteKey(prjName: string, kmlName: string, key: string) {
 	let result = '';
-	result = processToken(prjName, result);
-	result = processToken(kmlName, result);
-	result = processToken(key, result, false);
+	result = processToken(prjName, result, '$$');
+	result = processToken(kmlName, result, '##');
+	result = processToken(key, result, '', false);
 	return result;
+}
+
+export function parseCompleteKey(completeKey: string): KmlCompleteKey {
+	let parts = completeKey.split('.');
+	let key = parts[parts.length - 1];
+	let kmlName = null;
+	let prjName = null;
+	if (parts.length > 1) {
+		for (let i = 0; i < parts.length - 2; i++) {
+			let part = parts[i];
+			if (part.startsWith('$$')) {
+				prjName = part.substr(2);
+			} else if (part.startsWith('##')) {
+				kmlName = part.substr(2);
+			} else {
+				throw new Error ('Token non valido: ' + part);
+			}
+		}
+
+	}
+	return {
+		prjName: prjName,
+		kmlName: kmlName,
+		key: key,
+		completeKey: completeKey
+	};
 }
 
 export function getComponentSourceFile(path: string, template?: string) {
@@ -87,12 +120,12 @@ function getKMLConfigObj(sourceFile: SourceFile, node: ClassDeclaration): KmlCon
 }
 
 
-function processToken(token: string, result: string, toUpperCase: boolean = true) {
+function processToken(token: string, result: string, identifier: string, toUpperCase: boolean = true) {
 		if (token !== null && token !== undefined) {
 			if (result.length > 0 ) {
 				result += '.';
 			}
-			result += token.toUpperCase();
+			result += identifier + token.toUpperCase();
 		}
 		return result;
 	}

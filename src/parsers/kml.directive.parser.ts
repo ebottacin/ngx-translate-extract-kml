@@ -1,8 +1,7 @@
-import { PipeParser, KeysPreprocessContextInterface } from '@biesbjerg/ngx-translate-extract';
+import { DirectiveParser, KeysPreprocessContextInterface  } from '@biesbjerg/ngx-translate-extract';
+import { getComponentSourceFile, getPrjName, findKMLName, getCompleteKey } from '../utils/utils';
 
-import { getComponentSourceFile, findKMLName, getPrjName, getCompleteKey } from './kml-utils';
-
-export class KmlPipeParser extends PipeParser {
+export class KmlDirectiveParser extends DirectiveParser {
 
 	public preprocessKeys(keys: string[], context: KeysPreprocessContextInterface): string[] {
 		if (typeof context !== 'undefined') {
