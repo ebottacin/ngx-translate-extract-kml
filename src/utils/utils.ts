@@ -95,11 +95,12 @@ export function getComponentSourceFile(path: string, template?: string) {
 	const fileName  = fsPath.basename(path);
 	const extension = fsPath.extname(path);
 	// inline component
-	if ( extension === 'ts') {
+	if ( extension === '.ts') {
 		let contents = typeof template === 'undefined' ? fs.readFileSync(path).toString() : template;
 		return createSourceFile(path, contents, null, /*setParentNodes */ false);
 	} else {
-		const newFileName = fileName.replace(/extension$/, 'ts');
+		const escapedExtension = new RegExp(`${extension.replace('.', '\\.')}$`);
+		const newFileName = fileName.replace(escapedExtension, '\.ts');
 		const newPath = `${dirName}${fsPath.sep}${newFileName}`;
 		//try to find component in same dir
 		if (fs.existsSync(newPath)) {
