@@ -27,9 +27,9 @@ export class MultipleFileExtractTask extends ExtractTask {
 		for (let key of extractedMap.keys()) {
 			let coll = extractedMap.get(key);
 			total += coll.count();
-			this.out(green(`KmlName: %s =>  Found %d strings.\n`), coll.count());
+			this.out(green(`KmlName: %s =>  Found %d strings.`), key, coll.count());
 		}
-		this.out(green(`\n\n Found total %d strings.\n`), total);
+		this.out(green(`\n Found total %d strings.`), total);
 
 		this.out(bold('Saving:'));
 
@@ -38,10 +38,6 @@ export class MultipleFileExtractTask extends ExtractTask {
 			for (let key of extractedMap.keys()) {
 				let extracted = extractedMap.get(key);
 				let filename: string = `${key}.${this.compiler.extension}`;
-				if (!fs.existsSync(output) || !fs.statSync(output).isDirectory()) {
-					dir = path.dirname(output);
-					filename = path.basename(output);
-				}
 
 				const outputPath: string = path.join(dir, filename);
 
@@ -92,7 +88,11 @@ export class MultipleFileExtractTask extends ExtractTask {
 			.reduce( (map: Map<String, TranslationCollection>, key: KmlCompleteKey ) => {
 				let kmlName = key.kmlName !== null ? key.kmlName : 'default';
 				let item = new TranslationCollection();
-				item.add(this.getExtractedKey(key), collection.get(key.completeKey))
+				let value = collection.get(key.completeKey);
+				if (value === '') {
+					value = key.msg  === undefined  || key.msg === '' ? key.key : key.msg;
+				}
+				item = item.add(key.completeKey, value);
 				let mapItem: TranslationCollection;
 				if (map.has(kmlName)) {
 					mapItem = map.get(kmlName);
@@ -116,9 +116,5 @@ export class MultipleFileExtractTask extends ExtractTask {
 			}
 		}
 		return map;
-	}
-
-	private getExtractedKey(key: KmlCompleteKey) {
-		return `${key.prjName}.${key.key}`;
 	}
 }

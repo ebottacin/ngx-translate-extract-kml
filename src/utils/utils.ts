@@ -6,10 +6,17 @@ export interface KmlConfigObj {
 	name?: string
 }
 
+interface KMLParsedValue {
+	id: number;
+	msg: string;
+}
+
 export interface KmlCompleteKey {
 	prjName: string;
 	kmlName: string;
 	key: string,
+	id?: number,
+	msg?: string,
 	completeKey: string;
 }
 
@@ -30,7 +37,7 @@ export function findKMLName(sourceFile: SourceFile, nodes?: ClassDeclaration[]|C
 	}
 }
 
-export function getCompleteKey(prjName: string, kmlName: string, key: string) {
+export function getCompleteKey(prjName: string, kmlName: string, key: string): string {
 	let result = '';
 	result = processToken(prjName, result, '$$');
 	result = processToken(kmlName, result, '##');
@@ -38,32 +45,51 @@ export function getCompleteKey(prjName: string, kmlName: string, key: string) {
 	return result;
 }
 
+
+
 export function parseCompleteKey(completeKey: string): KmlCompleteKey {
-	let parts = completeKey.split('.');
-	let key = parts[parts.length - 1];
+	const parts = completeKey.split('.');
+	const key = parts.filter ( (v, idx) =>  idx > parts.length - 1 || idx > 1 ? true : false)
+					.reduce ( (result, part) => result.length === 0 ? part : result + '.' + part  , '');
 	let kmlName = null;
 	let prjName = null;
 	if (parts.length > 1) {
-		for (let i = 0; i < parts.length - 2; i++) {
+		for (let i = 0; i < parts.length - 1 || i < 2; i++) {
 			let part = parts[i];
 			if (part.startsWith('$$')) {
 				prjName = part.substr(2);
 			} else if (part.startsWith('##')) {
 				kmlName = part.substr(2);
-			} else {
-				throw new Error ('Token non valido: ' + part);
 			}
 		}
-
 	}
+	const keyParts = parseKeyValue(key);
 	return {
 		prjName: prjName,
 		kmlName: kmlName,
 		key: key,
+		id: keyParts !== null ? keyParts.id : null,
+		msg: keyParts !== null ? keyParts.msg : null,
 		completeKey: completeKey
 	};
 }
 
+
+function parseKeyValue (key: string): KMLParsedValue {
+	let id = null;
+	let msg = null;
+	const keyParts = key.split('___');
+	if (keyParts.length === 2) {
+		id = +keyParts[0];
+		msg = keyParts[1];
+		return {
+			id: id,
+			msg: msg
+		};
+	} else {
+		return null;
+	}
+}
 export function getComponentSourceFile(path: string, template?: string) {
 	const dirName = fsPath.dirname(path);
 	const fileName  = fsPath.basename(path);
