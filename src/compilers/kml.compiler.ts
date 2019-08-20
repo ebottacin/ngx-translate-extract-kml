@@ -1,4 +1,4 @@
-import { TranslationCollection, CompilerInterface, AbstractCompiler, TranslationType } from '@biesbjerg/ngx-translate-extract';
+import { TranslationCollection, CompilerInterface, TranslationType, AbstractCompiler } from '@biesbjerg/ngx-translate-extract';
 import { injectable } from 'inversify';
 
 import { xml2json, json2xml }  from 'xml-js';
@@ -22,14 +22,11 @@ interface KionMSG {
 }
 
 @injectable()
-export class KmlCustomCompiler extends AbstractCompiler implements CompilerInterface {
+export class KmlCompiler extends AbstractCompiler implements CompilerInterface {
 
 	private static readonly options =  {compact: true, ignoreComment: true, spaces: 4};
 	public extension: string = 'xml';
-	public selector: string = 'custom';
-	constructor () {
-		super();
-	}
+	public selector: string = 'kml';
 
 	public compile(collection: TranslationCollection): string {
 		let keys = Object.keys(collection.values);
@@ -42,7 +39,7 @@ export class KmlCustomCompiler extends AbstractCompiler implements CompilerInter
 			}
 		};
 		if (keys.length == 0) {
-			return json2xml(JSON.stringify(header), KmlCustomCompiler.options);
+			return json2xml(JSON.stringify(header), KmlCompiler.options);
 		} else {
 			let completeKey = parseCompleteKey(keys[0]);
 			let msgs = [];
@@ -71,13 +68,13 @@ export class KmlCustomCompiler extends AbstractCompiler implements CompilerInter
 						'kion:msg': msgs
 					}
 				};
-			return json2xml(JSON.stringify(obj), KmlCustomCompiler.options);
+			return json2xml(JSON.stringify(obj), KmlCompiler.options);
 		}
 	}
 
 	public parse(contents: string): TranslationCollection {
 		try {
-			let json = JSON.parse(xml2json(contents, KmlCustomCompiler.options));
+			let json = JSON.parse(xml2json(contents, KmlCompiler.options));
 			const mlNode = <kionMLInterface> json['kion:ml'];
 			const msgs = <KionMSG[]> json['kion:msg'];
 			let values: TranslationType = {};

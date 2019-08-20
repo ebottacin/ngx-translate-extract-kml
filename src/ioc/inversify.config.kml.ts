@@ -8,7 +8,7 @@ import { MultipleFileExtractTask } from '../tasks/MultipleFileExtractTask';
 
 
 import { setupParsers, IoCParserConfig, IoCCompilerConfig, setupCompilers, setupTask, container } from '@biesbjerg/ngx-translate-extract';
-import { KmlCustomCompiler } from '../compilers/kml-custom.compiler';
+import { KmlCompiler } from '../compilers/kml.compiler';
 
 const parsersConfig: IoCParserConfig = {
 	parsers: [{type: TYPES.SERVICE_PARSER, obj: KmlServiceParser},
@@ -19,7 +19,7 @@ const parsersConfig: IoCParserConfig = {
 };
 
 const compilersConfig: IoCCompilerConfig = {
-	compilers: [KmlCustomCompiler]
+	compilers: [KmlCompiler]
 };
 
 export const updateContainer = () => {
