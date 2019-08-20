@@ -1,4 +1,4 @@
-import { DirectiveParser, KeysPreprocessContextInterface  } from '@biesbjerg/ngx-translate-extract';
+import { DirectiveParser, KeysPreprocessContextInterface  } from '@ebottacin/ngx-translate-extract';
 import { getComponentSourceFile, getPrjName, findKMLName, getCompleteKey } from '../utils/utils';
 
 export class KmlDirectiveParser extends DirectiveParser {

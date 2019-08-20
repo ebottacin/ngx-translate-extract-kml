@@ -1,4 +1,4 @@
-import { FunctionParser, KeysPreprocessContextInterface } from '@biesbjerg/ngx-translate-extract';
+import { FunctionParser, KeysPreprocessContextInterface } from '@ebottacin/ngx-translate-extract';
 
 export class KmlFunctionParser extends FunctionParser {
 

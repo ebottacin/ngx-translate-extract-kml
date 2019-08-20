@@ -13,7 +13,7 @@
     "watch": "npm run clean && ./node_modules/typescript/bin/tsc --watch",
     "clean": "rm -rf ./dist",
     "lint": "tslint --force './src/**/*.ts'",
-    "link_lib": "npm link @biesbjerg/ngx-translate-extract",
+    "link_lib": "npm link @ebottacin/ngx-translate-extract",
     "test_run": "./bin/cli.js -i ../ngx-translate-test/src/ -o ../data/ -f custom -k"
   },
   "repository": {
@@ -52,7 +52,7 @@
     "tslint-eslint-rules": "^5.4.0"
   },
   "dependencies": {
-    "@biesbjerg/ngx-translate-extract": "github:ebottacin/ngx-translate-extract",
+    "@ebottacin/ngx-translate-extract": "^1.0.1",
     "colorette": "^1.1.0",
     "inversify": "^5.0.1",
     "path": "^0.12.7",

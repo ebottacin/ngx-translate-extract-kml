@@ -1,4 +1,4 @@
-import { TYPES } from '@biesbjerg/ngx-translate-extract';
+import { TYPES } from '@ebottacin/ngx-translate-extract';
 
 import { KmlServiceParser } from '../parsers/kml.service.parser';
 import { KmlDirectiveParser } from '../parsers/kml.directive.parser';
@@ -7,7 +7,7 @@ import { KmlFunctionParser } from '../parsers/kml.function.parser';
 import { MultipleFileExtractTask } from '../tasks/MultipleFileExtractTask';
 
 
-import { setupParsers, IoCParserConfig, IoCCompilerConfig, setupCompilers, setupTask, container } from '@biesbjerg/ngx-translate-extract';
+import { setupParsers, IoCParserConfig, IoCCompilerConfig, setupCompilers, setupTask, container } from '@ebottacin/ngx-translate-extract';
 import { KmlCompiler } from '../compilers/kml.compiler';
 
 const parsersConfig: IoCParserConfig = {

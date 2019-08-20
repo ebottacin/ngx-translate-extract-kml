@@ -1,4 +1,4 @@
-import { ServiceParser, KeysPreprocessContextInterface } from '@biesbjerg/ngx-translate-extract';
+import { ServiceParser, KeysPreprocessContextInterface } from '@ebottacin/ngx-translate-extract';
 import { getCompleteKey, findKMLName, getPrjName }  from '../utils/utils';
 
 

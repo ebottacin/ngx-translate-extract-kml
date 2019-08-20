@@ -1,4 +1,4 @@
-import { ExtractTask, TranslationCollection } from '@biesbjerg/ngx-translate-extract';
+import { ExtractTask, TranslationCollection } from '@ebottacin/ngx-translate-extract';
 
 import { green, bold, dim } from 'colorette';
 import * as fs from 'fs';

@@ -1,4 +1,4 @@
-import { PostProcessorInterface, TranslationCollection } from '@biesbjerg/ngx-translate-extract';
+import { PostProcessorInterface, TranslationCollection } from '@ebottacin/ngx-translate-extract';
 import { parseCompleteKey, KmlCompleteKey } from '../utils/utils';
 
 export class KmlFilterPostProcessor  implements PostProcessorInterface {

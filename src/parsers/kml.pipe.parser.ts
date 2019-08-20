@@ -1,4 +1,4 @@
-import { PipeParser, KeysPreprocessContextInterface } from '@biesbjerg/ngx-translate-extract';
+import { PipeParser, KeysPreprocessContextInterface } from '@ebottacin/ngx-translate-extract';
 
 import { getComponentSourceFile, findKMLName, getPrjName, getCompleteKey } from '../utils/utils';
 

@@ -4,7 +4,7 @@
 let reflectMetadata = require('reflect-metadata');
 
 //IoC configuration: imported here to allow redefintion for usage as library
-let ngxTranslateExtract = require('@biesbjerg/ngx-translate-extract');
+let ngxTranslateExtract = require('@ebottacin/ngx-translate-extract');
 // setup Standard IoC config
 let inversifyConfig = ngxTranslateExtract.inversifyConfig;
 

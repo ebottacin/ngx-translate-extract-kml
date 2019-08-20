@@ -1,4 +1,4 @@
-import { TranslationCollection, CompilerInterface, TranslationType, AbstractCompiler } from '@biesbjerg/ngx-translate-extract';
+import { TranslationCollection, CompilerInterface, TranslationType, AbstractCompiler } from '@ebottacin/ngx-translate-extract';
 import { injectable } from 'inversify';
 
 import { xml2json, json2xml }  from 'xml-js';
